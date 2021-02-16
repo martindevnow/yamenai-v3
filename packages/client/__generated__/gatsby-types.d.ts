@@ -4601,6 +4601,8 @@ type SitePageFieldsEnum =
   | 'pluginCreator.resolve'
   | 'pluginCreator.name'
   | 'pluginCreator.version'
+  | 'pluginCreator.pluginOptions.path'
+  | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.projectId'
   | 'pluginCreator.pluginOptions.dataset'
   | 'pluginCreator.pluginOptions.displayName'
@@ -4619,8 +4621,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.lessBabel'
   | 'pluginCreator.pluginOptions.mediaTypes'
   | 'pluginCreator.pluginOptions.root'
-  | 'pluginCreator.pluginOptions.name'
-  | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.outputPath'
   | 'pluginCreator.pluginOptions.pathCheck'
   | 'pluginCreator.pluginOptions.allExtensions'
@@ -4811,6 +4811,8 @@ type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
+  | 'pluginOptions.path'
+  | 'pluginOptions.name'
   | 'pluginOptions.projectId'
   | 'pluginOptions.dataset'
   | 'pluginOptions.displayName'
@@ -4829,8 +4831,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.lessBabel'
   | 'pluginOptions.mediaTypes'
   | 'pluginOptions.root'
-  | 'pluginOptions.name'
-  | 'pluginOptions.path'
   | 'pluginOptions.outputPath'
   | 'pluginOptions.pathCheck'
   | 'pluginOptions.allExtensions'
@@ -4948,6 +4948,8 @@ type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 type SitePluginPluginOptions = {
+  readonly path: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
   readonly projectId: Maybe<Scalars['String']>;
   readonly dataset: Maybe<Scalars['String']>;
   readonly displayName: Maybe<Scalars['Boolean']>;
@@ -4966,8 +4968,6 @@ type SitePluginPluginOptions = {
   readonly lessBabel: Maybe<Scalars['Boolean']>;
   readonly mediaTypes: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly root: Maybe<Scalars['String']>;
-  readonly name: Maybe<Scalars['String']>;
-  readonly path: Maybe<Scalars['String']>;
   readonly outputPath: Maybe<Scalars['String']>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
@@ -4976,6 +4976,8 @@ type SitePluginPluginOptions = {
 };
 
 type SitePluginPluginOptionsFilterInput = {
+  readonly path: Maybe<StringQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
   readonly projectId: Maybe<StringQueryOperatorInput>;
   readonly dataset: Maybe<StringQueryOperatorInput>;
   readonly displayName: Maybe<BooleanQueryOperatorInput>;
@@ -4994,8 +4996,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly lessBabel: Maybe<BooleanQueryOperatorInput>;
   readonly mediaTypes: Maybe<StringQueryOperatorInput>;
   readonly root: Maybe<StringQueryOperatorInput>;
-  readonly name: Maybe<StringQueryOperatorInput>;
-  readonly path: Maybe<StringQueryOperatorInput>;
   readonly outputPath: Maybe<StringQueryOperatorInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
@@ -5073,15 +5073,20 @@ type WebPOptions = {
   readonly quality: Maybe<Scalars['Int']>;
 };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type BioQueryQuery = { readonly avatar: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }>, readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly author: Maybe<Pick<SiteSiteMetadataAuthor, 'name' | 'summary'>>, readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }> }> };
 
-type BlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+type cUserstheonWebpersonalyamenaiV3PackagesclientsrccomponentsseoTsx2841359383QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type BlogPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type cUserstheonWebpersonalyamenaiV3PackagesclientsrccomponentsseoTsx2841359383Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'title' | 'description'>
+      & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
+    )> }> };
 
 type NewPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5094,20 +5099,10 @@ type NewPageQuery = { readonly sanityPost: Maybe<(
     )>>>, readonly author: Maybe<Pick<SanityAuthor, 'id' | 'name'>> }
   )> };
 
-type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
-
-type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type BlogPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type BioQueryQuery = { readonly avatar: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }>, readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly author: Maybe<Pick<SiteSiteMetadataAuthor, 'name' | 'summary'>>, readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }> }> };
-
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'title' | 'description'>
-      & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
-    )> }> };
+type BlogPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -5172,5 +5167,10 @@ type GatsbySanityImageFluid_noBase64Fragment = Pick<SanityImageFluid, 'aspectRat
 type GatsbySanityImageFluid_withWebpFragment = Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
 type GatsbySanityImageFluid_withWebp_noBase64Fragment = Pick<SanityImageFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

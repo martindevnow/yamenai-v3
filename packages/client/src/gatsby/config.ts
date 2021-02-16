@@ -16,6 +16,20 @@ const config: GatsbyConfig = {
     },
   },
   plugins: [
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: path.resolve(__dirname, `../../content/blog`),
+    //     name: `localBlog`,
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: path.resolve(__dirname, `../../content/assets`),
+    //     name: `localAssets`,
+    //   },
+    // },
     {
       resolve: "gatsby-source-sanity",
       options: {
