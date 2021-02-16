@@ -12,6 +12,7 @@
   "scripts": {
     "client": "yarn workspace @yamenai/client",
     "sanity": "yarn workspace @yamenai/sanity",
+    "ui": "yarn workspace @yamenai/ui",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": []
