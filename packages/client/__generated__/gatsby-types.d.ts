@@ -186,7 +186,7 @@ type DirectoryEdge = {
   readonly previous: Maybe<Directory>;
 };
 
-type DirectoryFieldsEnum = 
+type DirectoryFieldsEnum =
   | 'sourceInstanceName'
   | 'absolutePath'
   | 'relativePath'
@@ -405,6 +405,10 @@ type File = Node & {
   readonly blocks: Maybe<Scalars['Int']>;
   /** Copy file to static directory and return public url to it */
   readonly publicURL: Maybe<Scalars['String']>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
+  readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   /** Returns all children nodes filtered by type ImageSharp */
   readonly childrenImageSharp: Maybe<ReadonlyArray<Maybe<ImageSharp>>>;
   /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
@@ -498,7 +502,7 @@ type FileEdge = {
   readonly previous: Maybe<File>;
 };
 
-type FileFieldsEnum = 
+type FileFieldsEnum =
   | 'sourceInstanceName'
   | 'absolutePath'
   | 'relativePath'
@@ -533,6 +537,121 @@ type FileFieldsEnum =
   | 'blksize'
   | 'blocks'
   | 'publicURL'
+  | 'childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.id'
+  | 'childrenMarkdownRemark.frontmatter.title'
+  | 'childrenMarkdownRemark.frontmatter.date'
+  | 'childrenMarkdownRemark.frontmatter.description'
+  | 'childrenMarkdownRemark.excerpt'
+  | 'childrenMarkdownRemark.rawMarkdownBody'
+  | 'childrenMarkdownRemark.fileAbsolutePath'
+  | 'childrenMarkdownRemark.fields.slug'
+  | 'childrenMarkdownRemark.html'
+  | 'childrenMarkdownRemark.htmlAst'
+  | 'childrenMarkdownRemark.excerptAst'
+  | 'childrenMarkdownRemark.headings'
+  | 'childrenMarkdownRemark.headings.id'
+  | 'childrenMarkdownRemark.headings.value'
+  | 'childrenMarkdownRemark.headings.depth'
+  | 'childrenMarkdownRemark.timeToRead'
+  | 'childrenMarkdownRemark.tableOfContents'
+  | 'childrenMarkdownRemark.wordCount.paragraphs'
+  | 'childrenMarkdownRemark.wordCount.sentences'
+  | 'childrenMarkdownRemark.wordCount.words'
+  | 'childrenMarkdownRemark.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.children'
+  | 'childrenMarkdownRemark.parent.children'
+  | 'childrenMarkdownRemark.parent.children.id'
+  | 'childrenMarkdownRemark.parent.children.children'
+  | 'childrenMarkdownRemark.parent.internal.content'
+  | 'childrenMarkdownRemark.parent.internal.contentDigest'
+  | 'childrenMarkdownRemark.parent.internal.description'
+  | 'childrenMarkdownRemark.parent.internal.fieldOwners'
+  | 'childrenMarkdownRemark.parent.internal.ignoreType'
+  | 'childrenMarkdownRemark.parent.internal.mediaType'
+  | 'childrenMarkdownRemark.parent.internal.owner'
+  | 'childrenMarkdownRemark.parent.internal.type'
+  | 'childrenMarkdownRemark.children'
+  | 'childrenMarkdownRemark.children.id'
+  | 'childrenMarkdownRemark.children.parent.id'
+  | 'childrenMarkdownRemark.children.parent.children'
+  | 'childrenMarkdownRemark.children.children'
+  | 'childrenMarkdownRemark.children.children.id'
+  | 'childrenMarkdownRemark.children.children.children'
+  | 'childrenMarkdownRemark.children.internal.content'
+  | 'childrenMarkdownRemark.children.internal.contentDigest'
+  | 'childrenMarkdownRemark.children.internal.description'
+  | 'childrenMarkdownRemark.children.internal.fieldOwners'
+  | 'childrenMarkdownRemark.children.internal.ignoreType'
+  | 'childrenMarkdownRemark.children.internal.mediaType'
+  | 'childrenMarkdownRemark.children.internal.owner'
+  | 'childrenMarkdownRemark.children.internal.type'
+  | 'childrenMarkdownRemark.internal.content'
+  | 'childrenMarkdownRemark.internal.contentDigest'
+  | 'childrenMarkdownRemark.internal.description'
+  | 'childrenMarkdownRemark.internal.fieldOwners'
+  | 'childrenMarkdownRemark.internal.ignoreType'
+  | 'childrenMarkdownRemark.internal.mediaType'
+  | 'childrenMarkdownRemark.internal.owner'
+  | 'childrenMarkdownRemark.internal.type'
+  | 'childMarkdownRemark.id'
+  | 'childMarkdownRemark.frontmatter.title'
+  | 'childMarkdownRemark.frontmatter.date'
+  | 'childMarkdownRemark.frontmatter.description'
+  | 'childMarkdownRemark.excerpt'
+  | 'childMarkdownRemark.rawMarkdownBody'
+  | 'childMarkdownRemark.fileAbsolutePath'
+  | 'childMarkdownRemark.fields.slug'
+  | 'childMarkdownRemark.html'
+  | 'childMarkdownRemark.htmlAst'
+  | 'childMarkdownRemark.excerptAst'
+  | 'childMarkdownRemark.headings'
+  | 'childMarkdownRemark.headings.id'
+  | 'childMarkdownRemark.headings.value'
+  | 'childMarkdownRemark.headings.depth'
+  | 'childMarkdownRemark.timeToRead'
+  | 'childMarkdownRemark.tableOfContents'
+  | 'childMarkdownRemark.wordCount.paragraphs'
+  | 'childMarkdownRemark.wordCount.sentences'
+  | 'childMarkdownRemark.wordCount.words'
+  | 'childMarkdownRemark.parent.id'
+  | 'childMarkdownRemark.parent.parent.id'
+  | 'childMarkdownRemark.parent.parent.children'
+  | 'childMarkdownRemark.parent.children'
+  | 'childMarkdownRemark.parent.children.id'
+  | 'childMarkdownRemark.parent.children.children'
+  | 'childMarkdownRemark.parent.internal.content'
+  | 'childMarkdownRemark.parent.internal.contentDigest'
+  | 'childMarkdownRemark.parent.internal.description'
+  | 'childMarkdownRemark.parent.internal.fieldOwners'
+  | 'childMarkdownRemark.parent.internal.ignoreType'
+  | 'childMarkdownRemark.parent.internal.mediaType'
+  | 'childMarkdownRemark.parent.internal.owner'
+  | 'childMarkdownRemark.parent.internal.type'
+  | 'childMarkdownRemark.children'
+  | 'childMarkdownRemark.children.id'
+  | 'childMarkdownRemark.children.parent.id'
+  | 'childMarkdownRemark.children.parent.children'
+  | 'childMarkdownRemark.children.children'
+  | 'childMarkdownRemark.children.children.id'
+  | 'childMarkdownRemark.children.children.children'
+  | 'childMarkdownRemark.children.internal.content'
+  | 'childMarkdownRemark.children.internal.contentDigest'
+  | 'childMarkdownRemark.children.internal.description'
+  | 'childMarkdownRemark.children.internal.fieldOwners'
+  | 'childMarkdownRemark.children.internal.ignoreType'
+  | 'childMarkdownRemark.children.internal.mediaType'
+  | 'childMarkdownRemark.children.internal.owner'
+  | 'childMarkdownRemark.children.internal.type'
+  | 'childMarkdownRemark.internal.content'
+  | 'childMarkdownRemark.internal.contentDigest'
+  | 'childMarkdownRemark.internal.description'
+  | 'childMarkdownRemark.internal.fieldOwners'
+  | 'childMarkdownRemark.internal.ignoreType'
+  | 'childMarkdownRemark.internal.mediaType'
+  | 'childMarkdownRemark.internal.owner'
+  | 'childMarkdownRemark.internal.type'
   | 'childrenImageSharp'
   | 'childrenImageSharp.fixed.base64'
   | 'childrenImageSharp.fixed.tracedSVG'
@@ -840,6 +959,8 @@ type FileFilterInput = {
   readonly blksize: Maybe<IntQueryOperatorInput>;
   readonly blocks: Maybe<IntQueryOperatorInput>;
   readonly publicURL: Maybe<StringQueryOperatorInput>;
+  readonly childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  readonly childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
   readonly childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   readonly childImageSharp: Maybe<ImageSharpFilterInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
@@ -873,7 +994,7 @@ type FloatQueryOperatorInput = {
   readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
 };
 
-type HeadingsMdx = 
+type HeadingsMdx =
   | 'h1'
   | 'h2'
   | 'h3'
@@ -881,7 +1002,7 @@ type HeadingsMdx =
   | 'h5'
   | 'h6';
 
-type ImageCropFocus = 
+type ImageCropFocus =
   | 'CENTER'
   | 1
   | 5
@@ -894,14 +1015,14 @@ type ImageCropFocus =
   | 16
   | 17;
 
-type ImageFit = 
+type ImageFit =
   | 'cover'
   | 'contain'
   | 'fill'
   | 'inside'
   | 'outside';
 
-type ImageFormat = 
+type ImageFormat =
   | 'NO_CHANGE'
   | 'AUTO'
   | 'jpg'
@@ -909,12 +1030,12 @@ type ImageFormat =
   | 'webp'
   | 'avif';
 
-type ImageLayout = 
+type ImageLayout =
   | 'fixed'
   | 'fullWidth'
   | 'constrained';
 
-type ImagePlaceholder = 
+type ImagePlaceholder =
   | 'dominantColor'
   | 'tracedSVG'
   | 'blurred'
@@ -1104,7 +1225,7 @@ type ImageSharpEdge = {
   readonly previous: Maybe<ImageSharp>;
 };
 
-type ImageSharpFieldsEnum = 
+type ImageSharpFieldsEnum =
   | 'fixed.base64'
   | 'fixed.tracedSVG'
   | 'fixed.aspectRatio'
@@ -1468,6 +1589,291 @@ type JSONQueryOperatorInput = {
   readonly glob: Maybe<Scalars['JSON']>;
 };
 
+type MarkdownExcerptFormats =
+  | 'PLAIN'
+  | 'HTML'
+  | 'MARKDOWN';
+
+type MarkdownHeading = {
+  readonly id: Maybe<Scalars['String']>;
+  readonly value: Maybe<Scalars['String']>;
+  readonly depth: Maybe<Scalars['Int']>;
+};
+
+type MarkdownHeadingFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly value: Maybe<StringQueryOperatorInput>;
+  readonly depth: Maybe<IntQueryOperatorInput>;
+};
+
+type MarkdownHeadingFilterListInput = {
+  readonly elemMatch: Maybe<MarkdownHeadingFilterInput>;
+};
+
+type MarkdownHeadingLevels =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6';
+
+type MarkdownRemark = Node & {
+  readonly id: Scalars['ID'];
+  readonly frontmatter: Maybe<MarkdownRemarkFrontmatter>;
+  readonly excerpt: Maybe<Scalars['String']>;
+  readonly rawMarkdownBody: Maybe<Scalars['String']>;
+  readonly fileAbsolutePath: Maybe<Scalars['String']>;
+  readonly fields: Maybe<MarkdownRemarkFields>;
+  readonly html: Maybe<Scalars['String']>;
+  readonly htmlAst: Maybe<Scalars['JSON']>;
+  readonly excerptAst: Maybe<Scalars['JSON']>;
+  readonly headings: Maybe<ReadonlyArray<Maybe<MarkdownHeading>>>;
+  readonly timeToRead: Maybe<Scalars['Int']>;
+  readonly tableOfContents: Maybe<Scalars['String']>;
+  readonly wordCount: Maybe<MarkdownWordCount>;
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+};
+
+
+type MarkdownRemark_excerptArgs = {
+  pruneLength?: Maybe<Scalars['Int']>;
+  truncate?: Maybe<Scalars['Boolean']>;
+  format?: Maybe<MarkdownExcerptFormats>;
+};
+
+
+type MarkdownRemark_excerptAstArgs = {
+  pruneLength?: Maybe<Scalars['Int']>;
+  truncate?: Maybe<Scalars['Boolean']>;
+};
+
+
+type MarkdownRemark_headingsArgs = {
+  depth: Maybe<MarkdownHeadingLevels>;
+};
+
+
+type MarkdownRemark_tableOfContentsArgs = {
+  absolute?: Maybe<Scalars['Boolean']>;
+  pathToSlugField?: Maybe<Scalars['String']>;
+  maxDepth: Maybe<Scalars['Int']>;
+  heading: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<MarkdownRemarkEdge>;
+  readonly nodes: ReadonlyArray<MarkdownRemark>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly group: ReadonlyArray<MarkdownRemarkGroupConnection>;
+};
+
+
+type MarkdownRemarkConnection_distinctArgs = {
+  field: MarkdownRemarkFieldsEnum;
+};
+
+
+type MarkdownRemarkConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: MarkdownRemarkFieldsEnum;
+};
+
+type MarkdownRemarkEdge = {
+  readonly next: Maybe<MarkdownRemark>;
+  readonly node: MarkdownRemark;
+  readonly previous: Maybe<MarkdownRemark>;
+};
+
+type MarkdownRemarkFields = {
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkFieldsEnum =
+  | 'id'
+  | 'frontmatter.title'
+  | 'frontmatter.date'
+  | 'frontmatter.description'
+  | 'excerpt'
+  | 'rawMarkdownBody'
+  | 'fileAbsolutePath'
+  | 'fields.slug'
+  | 'html'
+  | 'htmlAst'
+  | 'excerptAst'
+  | 'headings'
+  | 'headings.id'
+  | 'headings.value'
+  | 'headings.depth'
+  | 'timeToRead'
+  | 'tableOfContents'
+  | 'wordCount.paragraphs'
+  | 'wordCount.sentences'
+  | 'wordCount.words'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type MarkdownRemarkFieldsFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+};
+
+type MarkdownRemarkFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly frontmatter: Maybe<MarkdownRemarkFrontmatterFilterInput>;
+  readonly excerpt: Maybe<StringQueryOperatorInput>;
+  readonly rawMarkdownBody: Maybe<StringQueryOperatorInput>;
+  readonly fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+  readonly fields: Maybe<MarkdownRemarkFieldsFilterInput>;
+  readonly html: Maybe<StringQueryOperatorInput>;
+  readonly htmlAst: Maybe<JSONQueryOperatorInput>;
+  readonly excerptAst: Maybe<JSONQueryOperatorInput>;
+  readonly headings: Maybe<MarkdownHeadingFilterListInput>;
+  readonly timeToRead: Maybe<IntQueryOperatorInput>;
+  readonly tableOfContents: Maybe<StringQueryOperatorInput>;
+  readonly wordCount: Maybe<MarkdownWordCountFilterInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type MarkdownRemarkFilterListInput = {
+  readonly elemMatch: Maybe<MarkdownRemarkFilterInput>;
+};
+
+type MarkdownRemarkFrontmatter = {
+  readonly title: Maybe<Scalars['String']>;
+  readonly date: Maybe<Scalars['Date']>;
+  readonly description: Maybe<Scalars['String']>;
+};
+
+
+type MarkdownRemarkFrontmatter_dateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkFrontmatterFilterInput = {
+  readonly title: Maybe<StringQueryOperatorInput>;
+  readonly date: Maybe<DateQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+};
+
+type MarkdownRemarkGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<MarkdownRemarkEdge>;
+  readonly nodes: ReadonlyArray<MarkdownRemark>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<MarkdownRemarkFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type MarkdownWordCount = {
+  readonly paragraphs: Maybe<Scalars['Int']>;
+  readonly sentences: Maybe<Scalars['Int']>;
+  readonly words: Maybe<Scalars['Int']>;
+};
+
+type MarkdownWordCountFilterInput = {
+  readonly paragraphs: Maybe<IntQueryOperatorInput>;
+  readonly sentences: Maybe<IntQueryOperatorInput>;
+  readonly words: Maybe<IntQueryOperatorInput>;
+};
+
 type Mdx = Node & {
   readonly rawBody: Scalars['String'];
   readonly fileAbsolutePath: Scalars['String'];
@@ -1530,7 +1936,7 @@ type MdxEdge = {
   readonly previous: Maybe<Mdx>;
 };
 
-type MdxFieldsEnum = 
+type MdxFieldsEnum =
   | 'rawBody'
   | 'fileAbsolutePath'
   | 'frontmatter.title'
@@ -1747,7 +2153,7 @@ type Potrace = {
   readonly background: Maybe<Scalars['String']>;
 };
 
-type PotraceTurnPolicy = 
+type PotraceTurnPolicy =
   | 'black'
   | 'white'
   | 'left'
@@ -1764,6 +2170,8 @@ type Query = {
   readonly allSite: SiteConnection;
   readonly sitePage: Maybe<SitePage>;
   readonly allSitePage: SitePageConnection;
+  readonly markdownRemark: Maybe<MarkdownRemark>;
+  readonly allMarkdownRemark: MarkdownRemarkConnection;
   readonly sanityAuthor: Maybe<SanityAuthor>;
   readonly allSanityAuthor: SanityAuthorConnection;
   readonly sanityCategory: Maybe<SanityCategory>;
@@ -1820,6 +2228,8 @@ type Query_fileArgs = {
   blksize: Maybe<IntQueryOperatorInput>;
   blocks: Maybe<IntQueryOperatorInput>;
   publicURL: Maybe<StringQueryOperatorInput>;
+  childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -1919,6 +2329,7 @@ type Query_sitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
   pluginCreatorId: Maybe<StringQueryOperatorInput>;
   componentPath: Maybe<StringQueryOperatorInput>;
@@ -1928,6 +2339,34 @@ type Query_sitePageArgs = {
 type Query_allSitePageArgs = {
   filter: Maybe<SitePageFilterInput>;
   sort: Maybe<SitePageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_markdownRemarkArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  frontmatter: Maybe<MarkdownRemarkFrontmatterFilterInput>;
+  excerpt: Maybe<StringQueryOperatorInput>;
+  rawMarkdownBody: Maybe<StringQueryOperatorInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+  fields: Maybe<MarkdownRemarkFieldsFilterInput>;
+  html: Maybe<StringQueryOperatorInput>;
+  htmlAst: Maybe<JSONQueryOperatorInput>;
+  excerptAst: Maybe<JSONQueryOperatorInput>;
+  headings: Maybe<MarkdownHeadingFilterListInput>;
+  timeToRead: Maybe<IntQueryOperatorInput>;
+  tableOfContents: Maybe<StringQueryOperatorInput>;
+  wordCount: Maybe<MarkdownWordCountFilterInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allMarkdownRemarkArgs = {
+  filter: Maybe<MarkdownRemarkFilterInput>;
+  sort: Maybe<MarkdownRemarkSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -2280,7 +2719,7 @@ type SanityAuthorEdge = {
   readonly previous: Maybe<SanityAuthor>;
 };
 
-type SanityAuthorFieldsEnum = 
+type SanityAuthorFieldsEnum =
   | '_id'
   | '_type'
   | '_createdAt'
@@ -2590,7 +3029,7 @@ type SanityCategoryEdge = {
   readonly previous: Maybe<SanityCategory>;
 };
 
-type SanityCategoryFieldsEnum = 
+type SanityCategoryFieldsEnum =
   | '_id'
   | '_type'
   | '_createdAt'
@@ -2814,7 +3253,7 @@ type SanityFileAssetEdge = {
   readonly previous: Maybe<SanityFileAsset>;
 };
 
-type SanityFileAssetFieldsEnum = 
+type SanityFileAssetFieldsEnum =
   | '_id'
   | '_type'
   | '_createdAt'
@@ -3105,7 +3544,7 @@ type SanityImageAssetEdge = {
   readonly previous: Maybe<SanityImageAsset>;
 };
 
-type SanityImageAssetFieldsEnum = 
+type SanityImageAssetFieldsEnum =
   | '_id'
   | '_type'
   | '_createdAt'
@@ -3429,7 +3868,7 @@ type SanityImageFluidFilterInput = {
   readonly srcSetWebp: Maybe<StringQueryOperatorInput>;
 };
 
-type SanityImageFormat = 
+type SanityImageFormat =
   | 'NO_CHANGE'
   | 'jpg'
   | 'png'
@@ -3688,7 +4127,7 @@ type SanityPostEdge = {
   readonly previous: Maybe<SanityPost>;
 };
 
-type SanityPostFieldsEnum = 
+type SanityPostFieldsEnum =
   | '_id'
   | '_type'
   | '_createdAt'
@@ -4165,7 +4604,7 @@ type SiteBuildMetadataEdge = {
   readonly previous: Maybe<SiteBuildMetadata>;
 };
 
-type SiteBuildMetadataFieldsEnum = 
+type SiteBuildMetadataFieldsEnum =
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -4303,7 +4742,7 @@ type SiteEdge = {
   readonly previous: Maybe<Site>;
 };
 
-type SiteFieldsEnum = 
+type SiteFieldsEnum =
   | 'buildTime'
   | 'siteMetadata.title'
   | 'siteMetadata.description'
@@ -4435,6 +4874,7 @@ type SitePage = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
   readonly isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  readonly context: Maybe<SitePageContext>;
   readonly pluginCreator: Maybe<SitePlugin>;
   readonly pluginCreatorId: Maybe<Scalars['String']>;
   readonly componentPath: Maybe<Scalars['String']>;
@@ -4461,13 +4901,113 @@ type SitePageConnection_groupArgs = {
   field: SitePageFieldsEnum;
 };
 
+type SitePageContext = {
+  readonly slug: Maybe<Scalars['String']>;
+  readonly previous: Maybe<SitePageContextPrevious>;
+  readonly next: Maybe<SitePageContextNext>;
+};
+
+type SitePageContextFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly previous: Maybe<SitePageContextPreviousFilterInput>;
+  readonly next: Maybe<SitePageContextNextFilterInput>;
+};
+
+type SitePageContextNext = {
+  readonly frontmatter: Maybe<SitePageContextNextFrontmatter>;
+  readonly timeToRead: Maybe<Scalars['Int']>;
+  readonly fields: Maybe<SitePageContextNextFields>;
+  readonly wordCount: Maybe<SitePageContextNextWordCount>;
+};
+
+type SitePageContextNextFields = {
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type SitePageContextNextFieldsFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextNextFilterInput = {
+  readonly frontmatter: Maybe<SitePageContextNextFrontmatterFilterInput>;
+  readonly timeToRead: Maybe<IntQueryOperatorInput>;
+  readonly fields: Maybe<SitePageContextNextFieldsFilterInput>;
+  readonly wordCount: Maybe<SitePageContextNextWordCountFilterInput>;
+};
+
+type SitePageContextNextFrontmatter = {
+  readonly date: Maybe<Scalars['Date']>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly title: Maybe<Scalars['String']>;
+};
+
+type SitePageContextNextFrontmatterFilterInput = {
+  readonly date: Maybe<DateQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly title: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextNextWordCount = {
+  readonly words: Maybe<Scalars['Int']>;
+  readonly sentences: Maybe<Scalars['Int']>;
+};
+
+type SitePageContextNextWordCountFilterInput = {
+  readonly words: Maybe<IntQueryOperatorInput>;
+  readonly sentences: Maybe<IntQueryOperatorInput>;
+};
+
+type SitePageContextPrevious = {
+  readonly frontmatter: Maybe<SitePageContextPreviousFrontmatter>;
+  readonly timeToRead: Maybe<Scalars['Int']>;
+  readonly fields: Maybe<SitePageContextPreviousFields>;
+  readonly wordCount: Maybe<SitePageContextPreviousWordCount>;
+};
+
+type SitePageContextPreviousFields = {
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type SitePageContextPreviousFieldsFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextPreviousFilterInput = {
+  readonly frontmatter: Maybe<SitePageContextPreviousFrontmatterFilterInput>;
+  readonly timeToRead: Maybe<IntQueryOperatorInput>;
+  readonly fields: Maybe<SitePageContextPreviousFieldsFilterInput>;
+  readonly wordCount: Maybe<SitePageContextPreviousWordCountFilterInput>;
+};
+
+type SitePageContextPreviousFrontmatter = {
+  readonly date: Maybe<Scalars['Date']>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly title: Maybe<Scalars['String']>;
+};
+
+type SitePageContextPreviousFrontmatterFilterInput = {
+  readonly date: Maybe<DateQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly title: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePageContextPreviousWordCount = {
+  readonly words: Maybe<Scalars['Int']>;
+  readonly sentences: Maybe<Scalars['Int']>;
+};
+
+type SitePageContextPreviousWordCountFilterInput = {
+  readonly words: Maybe<IntQueryOperatorInput>;
+  readonly sentences: Maybe<IntQueryOperatorInput>;
+};
+
 type SitePageEdge = {
   readonly next: Maybe<SitePage>;
   readonly node: SitePage;
   readonly previous: Maybe<SitePage>;
 };
 
-type SitePageFieldsEnum = 
+type SitePageFieldsEnum =
   | 'path'
   | 'component'
   | 'internalComponentName'
@@ -4560,6 +5100,21 @@ type SitePageFieldsEnum =
   | 'internal.owner'
   | 'internal.type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context.slug'
+  | 'context.previous.frontmatter.date'
+  | 'context.previous.frontmatter.description'
+  | 'context.previous.frontmatter.title'
+  | 'context.previous.timeToRead'
+  | 'context.previous.fields.slug'
+  | 'context.previous.wordCount.words'
+  | 'context.previous.wordCount.sentences'
+  | 'context.next.frontmatter.date'
+  | 'context.next.frontmatter.description'
+  | 'context.next.frontmatter.title'
+  | 'context.next.timeToRead'
+  | 'context.next.fields.slug'
+  | 'context.next.wordCount.words'
+  | 'context.next.wordCount.sentences'
   | 'pluginCreator.id'
   | 'pluginCreator.parent.id'
   | 'pluginCreator.parent.parent.id'
@@ -4601,8 +5156,29 @@ type SitePageFieldsEnum =
   | 'pluginCreator.resolve'
   | 'pluginCreator.name'
   | 'pluginCreator.version'
+  | 'pluginCreator.pluginOptions.plugins'
+  | 'pluginCreator.pluginOptions.plugins.resolve'
+  | 'pluginCreator.pluginOptions.plugins.id'
+  | 'pluginCreator.pluginOptions.plugins.name'
+  | 'pluginCreator.pluginOptions.plugins.version'
+  | 'pluginCreator.pluginOptions.plugins.nodeAPIs'
+  | 'pluginCreator.pluginOptions.plugins.browserAPIs'
+  | 'pluginCreator.pluginOptions.plugins.pluginFilepath'
   | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.name'
+  | 'pluginCreator.pluginOptions.maxWidth'
+  | 'pluginCreator.pluginOptions.linkImagesToOriginal'
+  | 'pluginCreator.pluginOptions.showCaptions'
+  | 'pluginCreator.pluginOptions.markdownCaptions'
+  | 'pluginCreator.pluginOptions.sizeByPixelDensity'
+  | 'pluginCreator.pluginOptions.backgroundColor'
+  | 'pluginCreator.pluginOptions.quality'
+  | 'pluginCreator.pluginOptions.withWebp'
+  | 'pluginCreator.pluginOptions.tracedSVG'
+  | 'pluginCreator.pluginOptions.loading'
+  | 'pluginCreator.pluginOptions.disableBgImageOnAlpha'
+  | 'pluginCreator.pluginOptions.disableBgImage'
+  | 'pluginCreator.pluginOptions.wrapperStyle'
   | 'pluginCreator.pluginOptions.projectId'
   | 'pluginCreator.pluginOptions.dataset'
   | 'pluginCreator.pluginOptions.displayName'
@@ -4659,6 +5235,7 @@ type SitePageFilterInput = {
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
   readonly isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  readonly context: Maybe<SitePageContextFilterInput>;
   readonly pluginCreator: Maybe<SitePluginFilterInput>;
   readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
   readonly componentPath: Maybe<StringQueryOperatorInput>;
@@ -4721,7 +5298,7 @@ type SitePluginEdge = {
   readonly previous: Maybe<SitePlugin>;
 };
 
-type SitePluginFieldsEnum = 
+type SitePluginFieldsEnum =
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -4811,8 +5388,42 @@ type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
+  | 'pluginOptions.plugins'
+  | 'pluginOptions.plugins.resolve'
+  | 'pluginOptions.plugins.id'
+  | 'pluginOptions.plugins.name'
+  | 'pluginOptions.plugins.version'
+  | 'pluginOptions.plugins.pluginOptions.maxWidth'
+  | 'pluginOptions.plugins.pluginOptions.linkImagesToOriginal'
+  | 'pluginOptions.plugins.pluginOptions.showCaptions'
+  | 'pluginOptions.plugins.pluginOptions.markdownCaptions'
+  | 'pluginOptions.plugins.pluginOptions.sizeByPixelDensity'
+  | 'pluginOptions.plugins.pluginOptions.backgroundColor'
+  | 'pluginOptions.plugins.pluginOptions.quality'
+  | 'pluginOptions.plugins.pluginOptions.withWebp'
+  | 'pluginOptions.plugins.pluginOptions.tracedSVG'
+  | 'pluginOptions.plugins.pluginOptions.loading'
+  | 'pluginOptions.plugins.pluginOptions.disableBgImageOnAlpha'
+  | 'pluginOptions.plugins.pluginOptions.disableBgImage'
+  | 'pluginOptions.plugins.pluginOptions.wrapperStyle'
+  | 'pluginOptions.plugins.nodeAPIs'
+  | 'pluginOptions.plugins.browserAPIs'
+  | 'pluginOptions.plugins.pluginFilepath'
   | 'pluginOptions.path'
   | 'pluginOptions.name'
+  | 'pluginOptions.maxWidth'
+  | 'pluginOptions.linkImagesToOriginal'
+  | 'pluginOptions.showCaptions'
+  | 'pluginOptions.markdownCaptions'
+  | 'pluginOptions.sizeByPixelDensity'
+  | 'pluginOptions.backgroundColor'
+  | 'pluginOptions.quality'
+  | 'pluginOptions.withWebp'
+  | 'pluginOptions.tracedSVG'
+  | 'pluginOptions.loading'
+  | 'pluginOptions.disableBgImageOnAlpha'
+  | 'pluginOptions.disableBgImage'
+  | 'pluginOptions.wrapperStyle'
   | 'pluginOptions.projectId'
   | 'pluginOptions.dataset'
   | 'pluginOptions.displayName'
@@ -4948,8 +5559,22 @@ type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 type SitePluginPluginOptions = {
+  readonly plugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPlugins>>>;
   readonly path: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
+  readonly maxWidth: Maybe<Scalars['Int']>;
+  readonly linkImagesToOriginal: Maybe<Scalars['Boolean']>;
+  readonly showCaptions: Maybe<Scalars['Boolean']>;
+  readonly markdownCaptions: Maybe<Scalars['Boolean']>;
+  readonly sizeByPixelDensity: Maybe<Scalars['Boolean']>;
+  readonly backgroundColor: Maybe<Scalars['String']>;
+  readonly quality: Maybe<Scalars['Int']>;
+  readonly withWebp: Maybe<Scalars['Boolean']>;
+  readonly tracedSVG: Maybe<Scalars['Boolean']>;
+  readonly loading: Maybe<Scalars['String']>;
+  readonly disableBgImageOnAlpha: Maybe<Scalars['Boolean']>;
+  readonly disableBgImage: Maybe<Scalars['Boolean']>;
+  readonly wrapperStyle: Maybe<Scalars['String']>;
   readonly projectId: Maybe<Scalars['String']>;
   readonly dataset: Maybe<Scalars['String']>;
   readonly displayName: Maybe<Scalars['Boolean']>;
@@ -4976,8 +5601,22 @@ type SitePluginPluginOptions = {
 };
 
 type SitePluginPluginOptionsFilterInput = {
+  readonly plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
+  readonly maxWidth: Maybe<IntQueryOperatorInput>;
+  readonly linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
+  readonly showCaptions: Maybe<BooleanQueryOperatorInput>;
+  readonly markdownCaptions: Maybe<BooleanQueryOperatorInput>;
+  readonly sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
+  readonly backgroundColor: Maybe<StringQueryOperatorInput>;
+  readonly quality: Maybe<IntQueryOperatorInput>;
+  readonly withWebp: Maybe<BooleanQueryOperatorInput>;
+  readonly tracedSVG: Maybe<BooleanQueryOperatorInput>;
+  readonly loading: Maybe<StringQueryOperatorInput>;
+  readonly disableBgImageOnAlpha: Maybe<BooleanQueryOperatorInput>;
+  readonly disableBgImage: Maybe<BooleanQueryOperatorInput>;
+  readonly wrapperStyle: Maybe<StringQueryOperatorInput>;
   readonly projectId: Maybe<StringQueryOperatorInput>;
   readonly dataset: Maybe<StringQueryOperatorInput>;
   readonly displayName: Maybe<BooleanQueryOperatorInput>;
@@ -5001,6 +5640,64 @@ type SitePluginPluginOptionsFilterInput = {
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
   readonly jsxPragma: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPlugins = {
+  readonly resolve: Maybe<Scalars['String']>;
+  readonly id: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
+  readonly version: Maybe<Scalars['String']>;
+  readonly pluginOptions: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
+  readonly nodeAPIs: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly browserAPIs: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly pluginFilepath: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPluginsFilterInput = {
+  readonly resolve: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly version: Maybe<StringQueryOperatorInput>;
+  readonly pluginOptions: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
+  readonly nodeAPIs: Maybe<StringQueryOperatorInput>;
+  readonly browserAPIs: Maybe<StringQueryOperatorInput>;
+  readonly pluginFilepath: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPluginsFilterListInput = {
+  readonly elemMatch: Maybe<SitePluginPluginOptionsPluginsFilterInput>;
+};
+
+type SitePluginPluginOptionsPluginsPluginOptions = {
+  readonly maxWidth: Maybe<Scalars['Int']>;
+  readonly linkImagesToOriginal: Maybe<Scalars['Boolean']>;
+  readonly showCaptions: Maybe<Scalars['Boolean']>;
+  readonly markdownCaptions: Maybe<Scalars['Boolean']>;
+  readonly sizeByPixelDensity: Maybe<Scalars['Boolean']>;
+  readonly backgroundColor: Maybe<Scalars['String']>;
+  readonly quality: Maybe<Scalars['Int']>;
+  readonly withWebp: Maybe<Scalars['Boolean']>;
+  readonly tracedSVG: Maybe<Scalars['Boolean']>;
+  readonly loading: Maybe<Scalars['String']>;
+  readonly disableBgImageOnAlpha: Maybe<Scalars['Boolean']>;
+  readonly disableBgImage: Maybe<Scalars['Boolean']>;
+  readonly wrapperStyle: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
+  readonly maxWidth: Maybe<IntQueryOperatorInput>;
+  readonly linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
+  readonly showCaptions: Maybe<BooleanQueryOperatorInput>;
+  readonly markdownCaptions: Maybe<BooleanQueryOperatorInput>;
+  readonly sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
+  readonly backgroundColor: Maybe<StringQueryOperatorInput>;
+  readonly quality: Maybe<IntQueryOperatorInput>;
+  readonly withWebp: Maybe<BooleanQueryOperatorInput>;
+  readonly tracedSVG: Maybe<BooleanQueryOperatorInput>;
+  readonly loading: Maybe<StringQueryOperatorInput>;
+  readonly disableBgImageOnAlpha: Maybe<BooleanQueryOperatorInput>;
+  readonly disableBgImage: Maybe<BooleanQueryOperatorInput>;
+  readonly wrapperStyle: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginSortInput = {
@@ -5047,7 +5744,7 @@ type SiteSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SortOrderEnum = 
+type SortOrderEnum =
   | 'ASC'
   | 'DESC';
 
@@ -5073,36 +5770,59 @@ type WebPOptions = {
   readonly quality: Maybe<Scalars['Int']>;
 };
 
-type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+
+type BlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type BlogPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly posts: { readonly nodes: ReadonlyArray<(
+      Pick<MarkdownRemark, 'excerpt'>
+      & { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'title' | 'description'>> }
+    )> } };
+
+type BlogPostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly post: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'date' | 'description'>> }
+  )> };
+
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'title' | 'description'>
+      & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
+    )> }> };
 
 type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type BioQueryQuery = { readonly avatar: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }>, readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly author: Maybe<Pick<SiteSiteMetadataAuthor, 'name' | 'summary'>>, readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }> }> };
 
-type cUserstheonWebpersonalyamenaiV3PackagesclientsrccomponentsseoTsx2841359383QueryVariables = Exact<{ [key: string]: never; }>;
+type GatsbySanityImageFixedFragment = Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
 
+type GatsbySanityImageFixed_noBase64Fragment = Pick<SanityImageFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
 
-type cUserstheonWebpersonalyamenaiV3PackagesclientsrccomponentsseoTsx2841359383Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'title' | 'description'>
-      & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter'>> }
-    )> }> };
+type GatsbySanityImageFixed_withWebpFragment = Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
 
-type NewPageQueryVariables = Exact<{ [key: string]: never; }>;
+type GatsbySanityImageFixed_withWebp_noBase64Fragment = Pick<SanityImageFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
 
+type GatsbySanityImageFluidFragment = Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type NewPageQuery = { readonly sanityPost: Maybe<(
-    Pick<SanityPost, 'title' | 'publishedAt'>
-    & { readonly slug: Maybe<Pick<SanitySlug, 'current'>>, readonly body: Maybe<ReadonlyArray<Maybe<(
-      Pick<SanityBlock, '_type' | '_key' | '_rawChildren' | 'list' | 'style'>
-      & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SanitySpan, '_key' | '_type' | 'marks' | 'text'>>>> }
-    )>>>, readonly author: Maybe<Pick<SanityAuthor, 'id' | 'name'>> }
-  )> };
+type GatsbySanityImageFluid_noBase64Fragment = Pick<SanityImageFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type BlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+type GatsbySanityImageFluid_withWebpFragment = Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
+type GatsbySanityImageFluid_withWebp_noBase64Fragment = Pick<SanityImageFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type BlogPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -5151,26 +5871,5 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbySanityImageFixedFragment = Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbySanityImageFixed_noBase64Fragment = Pick<SanityImageFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbySanityImageFixed_withWebpFragment = Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbySanityImageFixed_withWebp_noBase64Fragment = Pick<SanityImageFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbySanityImageFluidFragment = Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbySanityImageFluid_noBase64Fragment = Pick<SanityImageFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbySanityImageFluid_withWebpFragment = Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbySanityImageFluid_withWebp_noBase64Fragment = Pick<SanityImageFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

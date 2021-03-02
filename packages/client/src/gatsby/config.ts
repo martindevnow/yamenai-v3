@@ -16,20 +16,42 @@ const config: GatsbyConfig = {
     },
   },
   plugins: [
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: path.resolve(__dirname, `../../content/blog`),
-    //     name: `localBlog`,
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: path.resolve(__dirname, `../../content/assets`),
-    //     name: `localAssets`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: path.resolve(__dirname, `../../content/blog`),
+        name: `localBlog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: path.resolve(__dirname, `../../content/assets`),
+        name: `localAssets`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`,
+        ],
+      },
+    },
     {
       resolve: "gatsby-source-sanity",
       options: {
@@ -65,6 +87,12 @@ const config: GatsbyConfig = {
       },
       //   __key: "pages",
     },
+    // {
+    //   resolve: `gatsby-plugin-typography`,
+    //   options: {
+    //     pathToConfigModule: `src/utils/typography`,
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-typegen",
       options: {

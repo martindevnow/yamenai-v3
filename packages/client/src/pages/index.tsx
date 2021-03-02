@@ -13,7 +13,7 @@ const BlogIndex = ({
   location: Location;
 }) => {
   const siteTitle = data.site?.siteMetadata?.title || `Default Title`;
-  const posts: any[] = [];
+  const posts = data.posts.nodes;
 
   if (posts.length === 0) {
     return (
@@ -76,6 +76,21 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    posts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+        }
       }
     }
   }
