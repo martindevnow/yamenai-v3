@@ -1,39 +1,31 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Yamenai: Gatsby Frontend
 
-## 🚀 Quick start
+This repo.. is very much WIP...
 
-1.  **Create a Gatsby site.**
+https://rossbulat.medium.com/typescript-working-with-paths-packages-and-yarn-workspaces-6fbc7087b325
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## TypeScript
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+There was some special consideration to get the `gatsby-node` and `gatsby-config` in TypeScript. Some sources:
 
-2.  **Start developing.**
+https://gist.github.com/clarkdave/53cc050fa58d9a70418f8a76982dd6c8
 
-    Navigate into your new site’s directory and start it up.
+https://www.extensive.one/converting-gatsby-config-and-node-api-to-typescript/
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+## Resolutions
 
-3.  **Open the code and start customizing!**
+These were needed for version conflicts with UI
 
-    Your site is now running at http://localhost:8000!
+```json
+  "resolutions": {
+    "@graphql-codegen/visitor-plugin-common": "1.17.22",
+    "graphql": "14.7.0"
+  },
+```
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+## Default Links for Gatsby Starter
 
-4.  **Learn more**
+1.  **Learn more**
 
     - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 

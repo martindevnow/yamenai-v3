@@ -6,11 +6,7 @@ type LayoutProps = {
   title: string;
 };
 
-const Layout: React.FunctionComponent<LayoutProps> = ({
-  location,
-  title,
-  children,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`;
   const isRootPath = location.pathname === rootPath;
   let header;
@@ -34,9 +30,9 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>
-        © {new Date().getFullYear()}, Built with
+        © {new Date().getFullYear()}, Benjamin Martin
         {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        <a href="https://www.github.com/martindevnow">MartinDevNow</a>
       </footer>
     </div>
   );

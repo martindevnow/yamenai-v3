@@ -102,6 +102,14 @@ const config: GatsbyConfig = {
         ),
       },
     },
+    // Testing "gatsby-plugin-codegen" to see if it can generate
+    // types for the gatsby-node functions (createPages, etc)
+    // {
+    //   resolve: "gatsby-plugin-codegen",
+    //   options: {
+    //     output: "__codegen__",
+    //   },
+    // },
   ],
 };
 
