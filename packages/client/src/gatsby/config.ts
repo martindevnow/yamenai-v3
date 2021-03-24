@@ -60,6 +60,25 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-styled-components",
+    {
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        usePreload: true,
+        fonts: {
+          google: [
+            {
+              family: `Roboto`,
+              variants: [`300`, `400`, `700`],
+            },
+            {
+              family: `Inconsolata`,
+              variants: [`300`, `400`, `700`],
+              fontDisplay: "swap",
+            },
+          ],
+        },
+      },
+    },
     // {
     //   resolve: "gatsby-plugin-google-analytics",
     //   options: {
@@ -93,6 +112,36 @@ const config: GatsbyConfig = {
     //     pathToConfigModule: `src/utils/typography`,
     //   },
     // },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            resolve: `gatsby-remark-vscode`,
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+          },
+          {
+            resolve: `gatsby-remark-smartypants`,
+          },
+        ],
+        plugins: [`gatsby-remark-images`],
+      },
+    },
     {
       resolve: "gatsby-plugin-typegen",
       options: {

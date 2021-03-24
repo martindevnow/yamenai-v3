@@ -44,6 +44,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     const previous = index === posts.length - 1 ? null : posts[index + 1];
     const next = index === 0 ? null : posts[index - 1];
 
+    console.log(`Creating Page: ${post.fields.slug}`);
     createPage({
       path: post.fields.slug,
       component: blogPost,

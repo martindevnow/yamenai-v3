@@ -1,7 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { ImageDataLike } from "gatsby-plugin-image/dist/components/hooks";
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
 
 const Bio = () => {
   const data = useStaticQuery<GatsbyTypes.BioQueryQuery>(graphql`
@@ -33,7 +40,7 @@ const Bio = () => {
   const avatar = getImage(imageData);
 
   return (
-    <div className="bio">
+    <Wrapper>
       {avatar && (
         <GatsbyImage
           image={avatar}
@@ -45,15 +52,18 @@ const Bio = () => {
         />
       )}
       {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
-        </p>
+        <div>
+          <p>
+            Written by <strong>{author.name}</strong> {author?.summary || null}
+          </p>
+          <p>
+            <a href={`https://twitter.com/${social?.twitter || ``}`}>
+              You should follow them on Twitter
+            </a>
+          </p>
+        </div>
       )}
-    </div>
+    </Wrapper>
   );
 };
 
