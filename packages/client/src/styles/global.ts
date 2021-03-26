@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
     background-color: ${themeGet("colors", "background")};
-    border: 1px solid ${themeGet("colors", "primary")};
     border-radius: ${themeGet("border", "radius")};
     padding: 0.2rem;
   }

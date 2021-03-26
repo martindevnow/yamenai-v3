@@ -4,6 +4,8 @@ import { Link, graphql } from "gatsby";
 import Bio from "../components/bio";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { MaxWidthContainer, PaddedWrapper } from "../ui";
+import MdxRichtext from "../ui/mdx-richtext";
 
 const rhythm = (num: number) => `${(6 - num) * 5}px`;
 const scale = (...args: any[]) => ({});
@@ -29,36 +31,42 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
-      <article>
-        <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {post.frontmatter.date}
-          </p>
-        </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+      <PaddedWrapper>
+        <MaxWidthContainer>
+          <article>
+            <header>
+              <h1
+                style={{
+                  marginTop: rhythm(1),
+                  marginBottom: 0,
+                }}
+              >
+                {post.frontmatter.title}
+              </h1>
+              <p
+                style={{
+                  ...scale(-1 / 5),
+                  display: `block`,
+                  marginBottom: rhythm(1),
+                }}
+              >
+                {post.frontmatter.date}
+              </p>
+            </header>
+            <MdxRichtext>
+              <section dangerouslySetInnerHTML={{ __html: post.html }} />
+            </MdxRichtext>
+            <hr
+              style={{
+                marginBottom: rhythm(1),
+              }}
+            />
+            <footer>
+              <Bio />
+            </footer>
+          </article>
+        </MaxWidthContainer>
+      </PaddedWrapper>
 
       <nav>
         <ul

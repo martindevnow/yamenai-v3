@@ -61,6 +61,8 @@ declare module "styled-components" {
       onSecondary: string;
       background: string;
       text: string;
+      textSoft: string;
+      textSofter: string;
       success: string;
       warning: string;
       error: string;
