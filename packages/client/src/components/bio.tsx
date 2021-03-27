@@ -10,7 +10,11 @@ const Wrapper = styled.div`
   gap: 2rem;
 `;
 
-const Bio = () => {
+interface BioProps {
+  className?: string;
+}
+
+const Bio = ({ className }: BioProps) => {
   const data = useStaticQuery<GatsbyTypes.BioQueryQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.png/" }) {
@@ -40,7 +44,7 @@ const Bio = () => {
   const avatar = getImage(imageData);
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {avatar && (
         <GatsbyImage
           image={avatar}

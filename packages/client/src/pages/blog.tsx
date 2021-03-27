@@ -1,11 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import { Link, graphql } from "gatsby";
 
-import Bio from "../components/bio";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MaxWidthContainer, PaddedWrapper, responsiveXPadding } from "../ui";
+import BlogSummary from "../components/blog-summary";
+import styled from "styled-components";
+
+const LatestBlogs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
 
 const BlogIndex = ({
   data,
@@ -35,38 +41,16 @@ const BlogIndex = ({
       <PaddedWrapper>
         <MaxWidthContainer>
           <SEO title="All posts" />
-          <ol style={{ listStyle: `none` }}>
-            {posts.map((post) => {
-              const title = post.frontmatter.title || post.fields.slug;
-
-              return (
-                <li key={post.fields.slug}>
-                  <article
-                    className="post-list-item"
-                    itemScope
-                    itemType="http://schema.org/Article"
-                  >
-                    <header>
-                      <h2>
-                        <Link to={post.fields?.slug} itemProp="url">
-                          <span itemProp="headline">{title}</span>
-                        </Link>
-                      </h2>
-                      <small>{post.frontmatter.date}</small>
-                    </header>
-                    <section>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: post.frontmatter.description || post.excerpt,
-                        }}
-                        itemProp="description"
-                      />
-                    </section>
-                  </article>
-                </li>
-              );
-            })}
-          </ol>
+          <LatestBlogs>
+            {posts.map((post) => (
+              <BlogSummary
+                post={{
+                  ...post,
+                  title: post.frontmatter.title || post.fields.slug,
+                }}
+              />
+            ))}
+          </LatestBlogs>
         </MaxWidthContainer>
       </PaddedWrapper>
     </Layout>

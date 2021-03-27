@@ -1,14 +1,21 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
+import styled from "styled-components";
 
 import Bio from "../components/bio";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MaxWidthContainer, PaddedWrapper } from "../ui";
 import MdxRichtext from "../ui/mdx-richtext";
+import { MDHeader } from "../ui/headers";
+import themeGet from "../styles/themeGet";
 
 const rhythm = (num: number) => `${(6 - num) * 5}px`;
-const scale = (...args: any[]) => ({});
+
+const StyledHeader = styled(MDHeader)`
+  color: ${themeGet("colors", "primary")};
+  margin-top: ${themeGet("layout", "padding", "lg")};
+`;
 
 type BlogPostTemplateProps = {
   data: GatsbyTypes.BlogPostBySlugQuery;
@@ -35,17 +42,9 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         <MaxWidthContainer>
           <article>
             <header>
-              <h1
-                style={{
-                  marginTop: rhythm(1),
-                  marginBottom: 0,
-                }}
-              >
-                {post.frontmatter.title}
-              </h1>
+              <StyledHeader>{post.frontmatter.title}</StyledHeader>
               <p
                 style={{
-                  ...scale(-1 / 5),
                   display: `block`,
                   marginBottom: rhythm(1),
                 }}
@@ -68,32 +67,36 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         </MaxWidthContainer>
       </PaddedWrapper>
 
-      <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+      <PaddedWrapper>
+        <MaxWidthContainer>
+          <nav>
+            <ul
+              style={{
+                display: `flex`,
+                flexWrap: `wrap`,
+                justifyContent: `space-between`,
+                listStyle: `none`,
+                padding: 0,
+              }}
+            >
+              <li>
+                {previous && (
+                  <Link to={previous.fields.slug} rel="prev">
+                    ← {previous.frontmatter.title}
+                  </Link>
+                )}
+              </li>
+              <li>
+                {next && (
+                  <Link to={next.fields.slug} rel="next">
+                    {next.frontmatter.title} →
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </MaxWidthContainer>
+      </PaddedWrapper>
     </Layout>
   );
 };

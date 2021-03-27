@@ -5,6 +5,22 @@ const MdxRichtext = styled.div`
   li {
     margin-left: 2rem;
   }
+  a {
+    color: ${themeGet("colors", "primary")};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${themeGet("colors", "primary")};
+    font-family: ${themeGet("fonts", "sansSerif")};
+  }
   h1 {
     margin: 2rem 0 1rem;
   }

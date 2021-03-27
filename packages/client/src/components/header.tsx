@@ -3,12 +3,15 @@ import styled from "styled-components";
 import Logo from "./logo";
 import { MaxWidthContainer, PaddedWrapper } from "../ui";
 import Link from "../ui/link";
+import themeGet from "../styles/themeGet";
+
 // import { XLHeader } from "../ui/headers";
 
 const Wrapper = styled(PaddedWrapper)`
   min-height: 75px;
   display: flex;
   align-items: center;
+  font-family: ${themeGet("fonts", "sansSerif")};
 `;
 
 const Container = styled(MaxWidthContainer)`
