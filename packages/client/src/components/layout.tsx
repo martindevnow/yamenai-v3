@@ -1,8 +1,8 @@
 import React from "react";
 
 import Header from "./header";
-import ThemeProvider from "../providers/themeProvider";
-import GlobalStyle from "../styles/global";
+import ThemeProvider from "../providers/theme.provider";
+import GlobalStyle from "../styles/globalStyle";
 import Footer from "./footer";
 import "../styles/index.css";
 

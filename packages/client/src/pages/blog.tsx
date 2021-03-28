@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { MaxWidthContainer, PaddedWrapper, responsiveXPadding } from "../ui";
-import BlogSummary from "../components/blog-summary";
+import BlogSummary from "../components/blogSummary";
 import styled from "styled-components";
 
 const LatestBlogs = styled.div`

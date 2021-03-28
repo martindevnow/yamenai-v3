@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import Bio from "../components/bio";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import BlogSummary from "../components/blog-summary";
+import BlogSummary from "../components/blogSummary";
 import { MaxWidthContainer, PaddedWrapper } from "../ui";
 
 const StyledBio = styled(Bio)`
