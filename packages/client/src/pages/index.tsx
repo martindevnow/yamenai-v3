@@ -18,7 +18,7 @@ const LatestBlogs = styled.div`
   gap: 40px;
 `;
 
-const BlogIndex = ({
+const IndexPage = ({
   data,
   location,
 }: {
@@ -51,6 +51,7 @@ const BlogIndex = ({
           <LatestBlogs>
             {posts.map((post) => (
               <BlogSummary
+                key={post.fields.slug}
                 post={{
                   ...post,
                   title: post.frontmatter.title || post.fields.slug,
@@ -64,7 +65,7 @@ const BlogIndex = ({
   );
 };
 
-export default BlogIndex;
+export default IndexPage;
 
 export const pageQuery = graphql`
   query IndexPage {

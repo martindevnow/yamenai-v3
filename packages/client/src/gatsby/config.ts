@@ -59,6 +59,7 @@ const config: GatsbyConfig = {
         dataset: "production",
       },
     },
+    "gatsby-plugin-image",
     "gatsby-plugin-styled-components",
     {
       resolve: `gatsby-plugin-webfonts`,
